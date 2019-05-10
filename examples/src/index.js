@@ -24,7 +24,7 @@ const CenteredView = ({menu, width, height, imageWidth, imageHeight}) => {
         <div>
             <nav>{menu}</nav>
             <main style={{ width: `${width}px`, height: `${height}px` }}>
-                <PinchZoomPan doubleTapBehavior='zoom' position='center' initialScale={1} minScale={1} maxScale={4} zoomButtons={false} debug={isDevelopment()}>
+                <PinchZoomPan doubleTapBehavior='zoom' position='center' initialScale={1} minScale={1} maxScale={4} debug={isDevelopment()}>
                     <img alt='Demo Image' src={`http://picsum.photos/${imageWidth}/${imageHeight}?random`} />
                 </PinchZoomPan>
             </main>
@@ -46,7 +46,7 @@ const FlexContainerView = ({menu}) => (
             </div>
             <div style={{flex: 'auto', overflow: 'hidden', position: 'relative'}}>
                 <div style={{position: 'absolute', height: '100%', width: '100%'}}>
-                    <PinchZoomPan debug={isDevelopment()} position='center' zoomButtons={false}>
+                    <PinchZoomPan debug={isDevelopment()} position='center' >
                         <img alt='Demo Image' src='http://picsum.photos/2560/1440?random' />
                     </PinchZoomPan>
                 </div>

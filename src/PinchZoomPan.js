@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { createSelector } from 'reselect';
 import warning from 'warning';
 
-import ZoomButtons from './ZoomButtons'
 import DebugView from './StateDebugView';
 
 import { snapToTarget, negate, constrain, getPinchLength, getPinchMidpoint, getRelativePosition, setRef, isEqualDimensions, getDimensions, getContainerDimensions, isEqualTransform, getAutofitScale, getMinScale, tryCancelEvent, getImageOverflow } from './Utils';
@@ -496,7 +495,7 @@ export default class PinchZoomPan extends React.Component {
     //lifecycle methods
     render() {
         const childElement = React.Children.only(this.props.children);
-        const { zoomButtons, maxScale, debug } = this.props;
+        const { maxScale, debug } = this.props;
         const { scale } = this.state;
 
         const touchAction = this.controlOverscrollViaCss
@@ -512,13 +511,6 @@ export default class PinchZoomPan extends React.Component {
 
         return (
             <div style={containerStyle}>
-                {zoomButtons && this.isImageReady && this.isTransformInitialized && <ZoomButtons 
-                    scale={scale} 
-                    minScale={getMinScale(this.state, this.props)} 
-                    maxScale={maxScale} 
-                    onZoomOutClick={this.handleZoomOutClick} 
-                    onZoomInClick={this.handleZoomInClick} 
-                />}
                 {debug && <DebugView {...this.state} overflow={imageOverflow(this.state)} />}
                 {React.cloneElement(childElement, {
                     onTouchStart: this.handleTouchStart,
@@ -609,7 +601,6 @@ PinchZoomPan.defaultProps = {
     minScale: 'auto',
     maxScale: 1,
     position: 'topLeft',
-    zoomButtons: true,
     doubleTapBehavior: 'reset'
 };
 
@@ -625,7 +616,6 @@ PinchZoomPan.propTypes = {
     ]),
     maxScale: PropTypes.number,
     position: PropTypes.oneOf(['topLeft', 'center']),
-    zoomButtons: PropTypes.bool,
     doubleTapBehavior: PropTypes.oneOf(['reset', 'zoom']),
     initialTop: PropTypes.number,
     initialLeft: PropTypes.number,
